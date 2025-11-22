@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bid-Haven - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fetching auction items
+            fetch('/get_auction_items')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);  // Log data to the console for debugging
+                    const auctionContainer = document.getElementById("auction-items");
+                    
+                    // If there are auction items, render them
+                    if (data.length > 0) {
+                        auctionContainer.innerHTML = data.map(item => `
+                            <div class='bg-white p-4 shadow rounded'>
+                                <!-- Render item image -->
+                                <img src="/static/uploads/${item.image}" class="w-full h-40 object-cover rounded">
+                                <h3 class='text-lg font-bold mt-2'>${item.name}</h3>
+                                <p class='text-gray-600'>${item.category}</p>
+                                <button class='bg-blue-600 text-white px-4 py-2 rounded mt-2'>View Item</button>
+                            </div>
+                        `).join('');
+                    } else {
+                        auctionContainer.innerHTML = "<p>No auction items available.</p>";
+                    }
+                })
+                .catch(error => console.error('Error fetching auction items:', error));
+
+        });
+    </script>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-blue-600 text-white p-4 flex justify-between items-center">
+        <h1 class="text-xl font-bold">Bid-Haven</h1>
+        <div class="relative w-1/2">
+            <input type="text" placeholder="Search items, categories..." class="w-full p-2 rounded">
+            <i class="absolute right-3 top-3 bx bx-search text-blue-600 cursor-pointer"></i>
+        </div>
+        <div class="relative">
+            <i class="bx bxs-user text-2xl cursor-pointer"></i>
+            <div class="absolute right-0 mt-2 bg-white shadow-md rounded hidden">
+                <a href="#" class="block px-4 py-2 text-blue-600">My Profile</a>
+                <a href="#" class="block px-4 py-2 text-blue-600">Logout</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold text-center">Your Auction Items</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4" id="auction-items">
+            <!-- Auction items will be populated here -->
+        </div>
+    </div>
+
+    <div class="text-center mt-6">
+        <button onclick="window.location.href='/item'" class="bg-blue-600 text-white px-4 py-2 rounded">
+            Add Items
+        </button>
+    </div>
+
+    <div class="container mx-auto p-6 mt-8">
+        <h2 class="text-2xl font-bold text-center">Upcoming Auctions</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4" id="upcoming-auctions">
+            {% for i in items %}
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+                <img src="/static/uploads/{{ i.image }}" class="w-full h-48 object-cover" alt="{{ i.name }}">
+                <div class="p-5">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-xl font-bold text-gray-800">{{ i.name }}</h3>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                            {{ i.category }}
+                        </span>
+                    </div>
+                    <div class="mt-4 flex justify-between space-x-2">
+                        <a href="/item/{{ i._id }}" 
+                           class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 text-center px-4 py-2 rounded-lg transform transition hover:-translate-y-0.5">
+                            View Details
+                        </a>
+                        <a href="/place_bid/{{ i._id }}" 
+                           class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center px-4 py-2 rounded-lg transform transition hover:-translate-y-0.5">
+                            Place Bid
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white text-center p-4 mt-6">
+        <p>&copy; Bid-Haven Ltd. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Bid</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+            background: white;
+            overflow: hidden;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            padding: 1.5rem;
+            border-bottom: none;
+        }
+        .card-header h2 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.75rem;
+        }
+        .card-body {
+            padding: 2rem;
+        }
+        .detail-row {
+            padding: 0.75rem;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            background-color: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+        .detail-row:hover {
+            background-color: #e9ecef;
+            transform: translateX(5px);
+        }
+        .detail-label {
+            color: #4b5563;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .detail-value {
+            color: #1f2937;
+            font-size: 1.1rem;
+        }
+        .price-highlight {
+            color: #059669;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+        .bid-form {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .form-label {
+            color: #4b5563;
+            font-weight: 600;
+        }
+        .form-control {
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+            padding: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
+        }
+        .text-muted {
+            font-size: 0.875rem;
+            color: #6b7280 !important;
+        }
+        .timestamp {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-gavel me-2"></i>Item Details</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="detail-row">
+                            <div class="detail-label">Item Name</div>
+                            <div class="detail-value">{{ item[2] }}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Item ID</div>
+                            <div class="detail-value">{{ item[3] }}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Owner</div>
+                            <div class="detail-value">{{ item[1] }}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Current Bidder</div>
+                            <div class="detail-value">{{ item[0] }}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Base Price</div>
+                            <div class="detail-value">
+                                <span class="price-highlight">{{ item[4] }} <small>Wei</small></span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Current Price</div>
+                            <div class="detail-value">
+                                <span class="price-highlight">{{ item[5] }} <small>Wei</small></span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Last Bid Time</div>
+                            <div class="detail-value timestamp">{{ item[6] }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <form action="/submit_bid/{{ item[3] }}" method="POST" class="bid-form">
+                            <h4 class="mb-4"><i class="fas fa-coins me-2"></i>Place Your Bid</h4>
+                            <div class="mb-4">
+                                <label for="bidAmount" class="form-label">Bid Amount (Wei)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-ethereum"></i></span>
+                                    <input type="number" class="form-control" id="bidAmount" name="bidAmount" 
+                                           min="{{ item[5] + 1 }}" required>
+                                </div>
+                                <small class="text-muted d-block mt-2">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Must be higher than current price: {{ item[5] }} Wei
+                                </small>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-gavel me-2"></i>Place Bid
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

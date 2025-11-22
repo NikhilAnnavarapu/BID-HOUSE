@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4//static/css/boxicons.min.css" rel="stylesheet">
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <title>Bid-Haven Sell Items</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+
+        header {
+            background-color: #2874f0;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .text-xl {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .search-container {
+            position: relative;
+            width: 50%;
+        }
+
+        header input[type="text"] {
+            width: 100%;
+            padding: 10px 45px 10px 15px; /* Extra padding for the search icon */
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            color: black;
+        }
+
+        .search-container i {
+            position: absolute;
+            right: 10px;
+            top: 40%;
+            transform: translateY(-50%);
+            color: white;
+            background-color: #0077cc;
+            padding: 8px; /* Adjusted padding for better alignment */
+            border-radius: 50%;
+            font-size: 1.2rem; /* Slightly smaller size for better fit */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ffdb4d;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: white;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            min-width: 150px;
+            z-index: 1000;
+        }
+
+        .profile-icon:hover .profile-dropdown {
+            display: block;
+        }
+
+        .profile-dropdown a {
+            padding: 10px;
+            display: block;
+            color: #0077cc;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .profile-dropdown a:hover {
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background: white !important;
+            padding: 20px !important;
+            border-radius: 10px !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+            width: 80% !important;
+            max-width: 1000px !important;
+            margin: 30px auto !important;
+            display: flex; /* Added flex layout */
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-container {
+            width: 60%;
+        }
+
+        h1 {
+            text-align: center !important;
+            margin-bottom: 20px !important;
+            font-size: 2rem !important;
+            color: #333 !important;
+        }
+
+        form {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        label {
+            margin-bottom: 5px !important;
+            font-weight: bold !important;
+            color: #555 !important;
+        }
+
+        input, textarea, select {
+            margin-bottom: 15px !important;
+            padding: 10px !important;
+            border: 1px solid #ddd !important;
+            border-radius: 5px !important;
+            font-size: 1rem !important;
+            width: 100% !important;
+        }
+
+        textarea {
+            resize: vertical !important;
+        }
+
+        input[type="file"] {
+            padding: 5px !important;
+        }
+
+        button {
+            padding: 12px !important;
+            font-size: 1rem !important;
+            color: white !important;
+            background: #0077cc !important;
+            border: none !important;
+            border-radius: 5px !important;
+            cursor: pointer !important;
+            transition: background 0.3s ease !important;
+        }
+
+        button:hover {
+            background: #005fa3 ;
+        }
+
+        .image-container {
+    width: 50%; /* Increased width of the image container */
+    text-align: center;
+}
+
+.image-container img {
+    width: 80%; /* Keeps the image within the container */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(34, 34, 34, 0.347);
+}
+.footer {
+            background-color: #172337;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="text-xl">Bid-Haven</div>
+        <div class="search-container">
+            <input type="text" placeholder="Search items, categories...">
+            <i class="bx bx-search"></i>
+        </div>
+        <div class="profile-icon">
+            <i class="bx bxs-user"></i>
+            <div class="profile-dropdown">
+                <a href="#">My Profile</a>
+                <a href="#">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="image-container">`
+            <img src="https://i.pinimg.com/originals/e6/8a/bc/e68abc028623cdae0fa205466f200a96.gif" alt="Placeholder Image"> <!-- Add your image here -->
+        </div>
+        <div class="form-container">
+            <h1>Add Your Item To Auction</h1>
+            <form action="/add_item" method="POST" enctype="multipart/form-data">
+                <label for="itemName">Name of the Item:</label>
+                <input type="text" id="itemName" name="itemName" placeholder="Enter item name" required>
+            
+                <label for="category">Category of the Item:</label>
+                <select id="category" name="category" required>
+                    <option value="" disabled selected>Select category</option>
+                    <option value="Art">Art</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Antiques">Antiques</option>
+                    <option value="Books">Books</option>
+                    <option value="Furniture">Furniture</option>
+                    <option value="Others">Others</option>
+                </select>
+            
+                <label for="description">Description of the Item:</label>
+                <textarea id="description" name="description" rows="4" placeholder="Enter a detailed description of the item" required></textarea>
+            
+                <label for="image">Upload Pictures:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+            
+                <label for="basePrice">Base Price:</label>
+                <input type="number" id="basePrice" name="basePrice" placeholder="Enter the base price in rupees" required min="1">
+            
+                <button type="submit">Submit</button>
+            </form>
+            
+        </div>
+    </div>
+    <div class="footer">
+        &copy; Bid-Haven Ltd, All Rights Reserved.
+    </div>
+</body>
+</html>

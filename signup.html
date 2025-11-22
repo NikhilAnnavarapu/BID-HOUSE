@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="/static/images/fevicon.png" type="image/gif" />
+  <title>Bid-Haven - SignUp</title>
+  <link href='https://unpkg.com/boxicons@2.1.4//static/css/boxicons.min.css' rel='stylesheet'>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+  <!-- font awesome style -->
+  <link href="/static/css/font-awesome.min.css" rel="stylesheet" />
+  <!-- Custom styles -->
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="/static/css/responsive.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Semi-transparent overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white; /* Black with transparency */
+      z-index: -1;
+    }
+
+    .container {
+      display: flex;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      max-width: 800px;
+      width: 100%;
+      margin-top: 70px;
+
+    }
+
+    .wrapper {
+      padding: 40px 30px;
+      text-align: center;
+      width: 50%;
+    }
+
+    .wrapper h1 {
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .input-box i {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      color: #888;
+    }
+
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .remember-forgot a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 5px;
+      background: #3498db;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #2980b9;
+    }
+
+    .register-link {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .register-link button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      background: #3498db;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .register-link button:hover {
+      background: #2980b9;
+    }
+
+    .register-link p {
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .image-container {
+        width: 50%;
+    background: url('https://i.pinimg.com/736x/b7/b1/38/b7b138495126b90b35855af28716a610.jpg') no-repeat center center/cover;
+    
+    }
+
+    /* Swap the form and image for the signup page */
+    .container {
+      flex-direction: row-reverse; /* This will move the image to the right side and form to the left */
+    }
+  </style>
+</head>
+
+<body class="sub_page">
+
+  <!-- Header Section -->
+  <header class="header_section long_section px-0">
+    <nav class="navbar navbar-expand-lg custom_nav-container ">
+      <a class="navbar-brand" href="/index">
+        <span>Bid-Haven</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class=""></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/index">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/furniture">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/blog">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+        <div class="quote_btn-container">
+          <a href="/login">
+            <span>Login</span>
+            <i class="fa fa-user" aria-hidden="true"></i>
+          </a>
+          <a href="/signup">
+            <span>SignUp</span>
+            <i class="fa fa-user" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- End Header Section -->
+
+  <!-- Login Section -->
+  <div class="background"></div>
+  <div class="overlay"></div>
+  <div class="container">
+    <!-- Right Side: Form -->
+    <div class="wrapper">
+      <form action="/signup" method="post">
+        <h1 style="font-weight: bold;">Signup</h1>
+        <span> {{ status }} </span>
+        <div class="input-box">
+          <input type="text" placeholder="Username" name="Username" required>
+          <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box">
+          <input type="email" placeholder="Email" name="Email" required>
+          <i class='bx bxs-envelope'></i>
+        </div>
+        <div class="input-box">
+          <input type="password" placeholder="Password" name="Password" required>
+          <i class='bx bxs-lock-alt'></i>
+        </div>
+        <div class="input-box">
+          <input type="password" placeholder="Confirm Password" name="ConfirmPassword" required>
+          <i class='bx bxs-lock-alt'></i>
+        </div>
+        <button type="submit" class="btn">Signup</button>
+      </form>
+      <div class="register-link">
+        <p>Already have an account?</p>
+            <a href="/login">
+              <button type="button">login</button>
+          </a>
+      </div>
+    </div>
+    <!-- Left Side: Image -->
+    <div class="image-container"></div>
+  </div>
+
+
+  </footer>
+  <!-- End footer -->
+
+  <!-- Scripts -->
+  <script src="/static/js/jquery-3.4.1.min.js"></script>
+  <script src="/static/js/bootstrap.js"></script>
+  <script src="/static/js/custom.js"></script>
+</body>
+
+</html>
